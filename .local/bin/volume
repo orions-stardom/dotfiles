@@ -1,0 +1,26 @@
+#!/usr/bin/env python
+
+import argparse
+import re
+import subprocess
+import statistics
+import os
+#import wob
+
+DEFAULT_GRANULARITY=2
+
+cli = argparse.ArgumentParser(description="Adjust volume and show a vaguely pretty (wob) overlay")
+cli.add_argument("direction", choices=["up", "down"])
+cli.add_argument("amount", nargs="?", default=DEFAULT_GRANULARITY, type=int)
+args = cli.parse_args()
+
+# adjust volume
+tr = {"down": "-", "up": "+"}
+subprocess.run(["pactl", "set-sink-volume", "@DEFAULT_SINK@", f"{tr[args.direction]}{args.amount}%"])
+
+# scrape the new volume
+# pactl reports per-channel but we want a single number
+raw_output = subprocess.run(["pactl", "get-sink-volume", "@DEFAULT_SINK@"], capture_output=True).stdout
+volume = statistics.mean(int(vol) for vol in re.findall(b"(?<!\d)(\d{1,3})%", raw_output))
+
+subprocess.run([f"{os.environ['HOME']}/.local/bin/wobwrap", str(volume)])

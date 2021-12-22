@@ -1,0 +1,120 @@
+{
+	// "layer": "top", // Waybar at top layer
+	"position": "bottom", // Waybar position (top|bottom|left|right)
+	// "height": 20, // Waybar height (to be removed for auto height)
+	// "width": 1280, // Waybar width
+	// Choose the order of the modules
+	"modules-left": [
+		"clock",
+		"custom/right-arrow",
+		"custom/media",
+		"custom/right-arrow"
+	],
+	"modules-center": [	
+		"sway/mode",
+	],
+	"modules-right": [
+		"custom/left-arrow",
+		"network",
+		"pulseaudio",
+		//"custom/left-arrow",
+		"custom/left-arrow-light",
+		"sway/workspaces", 
+	],
+	// Modules configuration
+	// "sway/workspaces": {
+	//     "disable-scroll": true,
+	//     "all-outputs": true,
+	//     "format": "{name}: {icon}",
+	//     "format-icons": {
+	//         "1": "",
+	//         "2": "",
+	//         "3": "",
+	//         "4": "",
+	//         "5": "",
+	//         "urgent": "",
+	//         "focused": "",
+	//         "default": ""
+	//     }
+	// },
+	"sway/mode": {
+		"format": "<span style=\"italic\">{}</span>"
+	},
+
+	"idle_inhibitor": {
+		"format": "{icon}",
+		"format-icons": {
+			"activated": "",
+			"deactivated": ""
+		}
+	},
+
+	"clock": {
+		"format": "{:%Y-%m-%d %H:%M }",
+		"tooltip": false,
+	},
+
+	"network": {
+		"format-wifi": "{essid} ({signalStrength}%) ",
+		"format-ethernet": "",
+		"format-linked": "{ifname} (No IP) ",
+		"format-disconnected": "Disconnected ⚠",
+		"tooltip-format": "{ipaddr}/{cidr}",
+	},
+
+	"pulseaudio": {
+		"format": "{icon} {format_source}",
+		"format-muted": " {format_source}",
+		"format-source": "",
+		"format-source-muted": "",
+		"format-icons": {
+			"default": ["", "", ""]
+		},
+		"on-click-right": "pavucontrol",
+		"on-click": "pactl set-source-mute @DEFAULT_SOURCE@ toggle",
+		"on-scroll-up": "~/.local/bin/volume up",
+		"on-scroll-down": "~/.local/bin/volume down",
+		"on-click-middle": "pactl set-sink-mute @DEFAULT_SINK@ toggle"
+	},
+
+	"custom/media": {
+		"format": "{icon} {}",
+		"return-type": "json",
+		"max-length": 40,
+		"format-icons": {
+			"spotify": "",
+			"default": "🎜"
+		},
+
+		"escape": true,
+		"exec": "$HOME/.config/waybar/mediaplayer.py 2> /dev/null",
+		"on-click": "playerctl play-pause",
+	},
+	
+	"custom/left-arrow": {
+		"format": "",
+		"tooltip": false
+	},
+
+	"custom/left-arrow-dark": {
+		"format": "",
+		"tooltip": false
+	},
+	"custom/left-arrow-light": {
+		"format": "",
+		"tooltip": false
+	},
+
+	"custom/right-arrow": {
+		"format": "",
+		"tooltip": false
+	}, 
+	"custom/right-arrow-dark": {
+		"format": "",
+		"tooltip": false
+	},
+	"custom/right-arrow-light": {
+		"format": "",
+		"tooltip": false
+	},
+}

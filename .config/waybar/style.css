@@ -1,0 +1,66 @@
+* { 
+	background: black;
+	color: white;
+	font-family: "monospace";
+}
+
+#pulseaudio { 
+/*	background: steelblue; 
+	color: black; */
+	padding-left: 1em;
+	padding-right: 1em;
+	font-family: "Font Awesome 5 Free";
+}
+
+#network {
+	padding-left: 0.5em;
+	padding-right: 0.5em;
+	font-family: "Font Awesome 5 Free";
+}
+
+#workspaces {
+	padding-left: 5px;
+	background: steelblue;
+}
+
+#workspaces button {
+	border: 1px solid gray;
+}
+
+#workspaces button.focused, 
+#workspaces button.focused * {
+/*	background: white;*/
+	background: steelblue;
+	color: black;
+}
+
+#custom-right-arrow,
+#custom-left-arrow {
+	color: steelblue;
+	background: black;
+	font-size: 20pt;
+	font-family: "MesloLGS NF";
+}
+
+#custom-right-arrow-dark,
+#custom-left-arrow-dark {
+  color: black;
+	background: steelblue;
+	font-family: "MesloLGS NF";
+	font-size: 20pt;
+}
+
+#custom-right-arrow-light,
+#custom-left-arrow-light {
+	color: steelblue;
+	background: black;
+	font-family: "MesloLGS NF";
+	font-size: 20pt;
+}
+
+#custom-media {
+	/*background: steelblue;
+	color: black;*/
+	font-family: "proportional";
+	padding-left: 5px;
+}

@@ -1,0 +1,34 @@
+#!/usr/bin/env bash
+# Based on "mywob" @ https://gitlab.com/wef/dotfiles/-/blob/master/bin/mywob
+
+PROG=$( basename $0 )
+wob_pipe=~/.cache/$( basename $SWAYSOCK ).wob
+
+[[ "$SWAYSOCK" ]] || exit 0
+
+# returns 0 (success) if $1 is running and is attached to this sway session; else 1
+is_running_on_this_screen() {
+    pkill -0 $1 || return 1
+    for pid in $( pgrep $1 ); do
+        WOB_SWAYSOCK="$( tr '\0' '\n' < /proc/$pid/environ | awk -F'=' '/^SWAYSOCK/ {print $2}' )"
+        if [[ "$WOB_SWAYSOCK" == "$SWAYSOCK" ]]; then
+            return 0
+        fi
+    done
+    return 1
+}
+
+new_value=$1 # null or a percent; no checking!!
+
+[[ -p $wob_pipe ]] || mkfifo $wob_pipe
+
+# wob does not appear in $(swaymsg -t get_msg), so:
+is_running_on_this_screen wob || {
+    tail -f $wob_pipe | wob --background-color "#A0000000" --bar-color "#FF4682B4" --border-color "#FF4682B4" &
+}
+
+# sometimes this hangs - need to use a timeout and restart wob if necessary:
+[[ "$new_value" ]] && echo $new_value > $wob_pipe
+
+# mode: shell-script
+
