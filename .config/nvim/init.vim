@@ -1,6 +1,5 @@
 call plug#begin()
   Plug 'itchyny/lightline.vim'
-  Plug 'joshdick/onedark.vim'
   Plug 'ryanoasis/vim-devicons'
   Plug 'sheerun/vim-polyglot'
   Plug 'skywind3000/vim-terminal-help'
@@ -8,18 +7,34 @@ call plug#begin()
   Plug 'tpope/vim-commentary'
   Plug 'tpope/vim-rhubarb'
   Plug 'tpope/vim-vinegar'
+  Plug 'tyrannicaltoucan/vim-quantum'
 call plug#end()
 
 set termguicolors
-colorscheme onedark
+set background=dark
+let g:quantum_black=1
+let g:quantum_italics=1
+colorscheme quantum 
+
 let g:lightline = {
-  \ 'colorscheme': 'onedark',
+  \ 'colorscheme': 'quantum',
+  \ 'active': {
+  \   'left': [ ['mode', 'paste'], ['gitbranch', 'readonly', 'filename', 'modified']]
+  \ },
+  \ 'component_function': { 'gitbranch': 'FugitiveHead' },
   \ }
 
 syntax on
 
 let g:terminal_cwd=2 " Project root
-let g:terminal_key='<M-`>'
+let g:terminal_key='<M-~>'
+let g:terminal_close=1
+
+nmap <F5> :exe "H " . substitute(expand('%:~:.'), '\v^([^/]+$)@=', './', 'e')<CR>
+tnoremap <Esc> <C-\><C-n>
+
+set exrc
+set secure
 
 set laststatus=2
 set noshowmode

@@ -7,19 +7,16 @@
 	"modules-left": [
 		"clock",
 		"custom/right-arrow",
-		"custom/media",
-		"custom/right-arrow"
+		"sway/mode",
 	],
 	"modules-center": [	
-		"sway/mode",
+		"sway/workspaces", 
 	],
 	"modules-right": [
 		"custom/left-arrow",
 		"network",
 		"pulseaudio",
-		//"custom/left-arrow",
-		"custom/left-arrow-light",
-		"sway/workspaces", 
+		"battery",
 	],
 	// Modules configuration
 	// "sway/workspaces": {
@@ -76,21 +73,20 @@
 		"on-scroll-down": "~/.local/bin/volume down",
 		"on-click-middle": "pactl set-sink-mute @DEFAULT_SINK@ toggle"
 	},
-
-	"custom/media": {
-		"format": "{icon} {}",
-		"return-type": "json",
-		"max-length": 40,
-		"format-icons": {
-			"spotify": "",
-			"default": "🎜"
-		},
-
-		"escape": true,
-		"exec": "$HOME/.config/waybar/mediaplayer.py 2> /dev/null",
-		"on-click": "playerctl play-pause",
+		"battery": {
+			"states": {
+					// "good": 95,
+					"warning": 30,
+					"critical": 15
+			},
+			"format": "{capacity}% {icon}",
+			"format-charging": "{capacity}% ",
+			"format-plugged": "{capacity}% ",
+			"format-alt": "{time} {icon}",
+			// "format-good": "", // An empty format will hide the module
+			// "format-full": "",
+			"format-icons": ["", "", "", "", ""]
 	},
-	
 	"custom/left-arrow": {
 		"format": "",
 		"tooltip": false
