@@ -7,7 +7,9 @@ call plug#begin()
   Plug 'tpope/vim-commentary'
   Plug 'tpope/vim-rhubarb'
   Plug 'tpope/vim-vinegar'
+  Plug 'tpope/vim-surround'
   Plug 'tyrannicaltoucan/vim-quantum'
+  Plug 'sbdchd/vim-run'
 call plug#end()
 
 set termguicolors
