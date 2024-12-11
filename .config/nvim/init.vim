@@ -29,10 +29,10 @@ let g:lightline = {
 syntax on
 
 let g:terminal_cwd=2 " Project root
-let g:terminal_key='<M-~>'
+let g:terminal_key='<M-`>'
 let g:terminal_close=1
 
-nmap <F5> :exe "H " . substitute(expand('%:~:.'), '\v^([^/]+$)@=', './', 'e')<CR>
+nmap <F5> :Run
 tnoremap <Esc> <C-\><C-n>
 
 set exrc
